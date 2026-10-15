@@ -1,0 +1,6 @@
+{
+  "name": "Sports Facilities Management System (SFMS)",
+  "description": "A research-informed college DBMS project featuring a relational MySQL/InnoDB database, 3NF schema, transaction-safe booking concurrency with row locks, and role-based portals for Members, Administrators, and Maintenance Staff.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
