@@ -16,7 +16,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -24,20 +24,9 @@ app.use(express.json());
 // Background database health assurance
 async function ensureDatabaseRunning() {
   const isAlive = await testConnection();
-  if (!isAlive) {
-    console.log('[Server] Database not responding on 127.0.0.1:3306. Attempting daemon launch...');
-    try {
-      exec('mariadb-admin -u root ping 2>/dev/null || mysqladmin -u root ping 2>/dev/null', (err) => {
-        if (err) {
-          spawn('mariadbd', ['--user=mysql', '--datadir=/var/lib/mysql', '--skip-networking=0', '--bind-address=127.0.0.1', '--port=3306'], {
-            detached: true,
-            stdio: 'ignore',
-          }).unref();
-        }
-      });
-    } catch (e) {
-      console.warn('[Server] Failed to auto-spawn database daemon:', e);
-    }
+  if (isAlive) {
+    console.log('[Server] Database layer operational (active data store ready).');
+    return;
   }
 }
 
