@@ -25,6 +25,14 @@ export const ReportIssueModal: React.FC<ReportIssueModalProps> = ({
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+  React.useEffect(() => {
+    if (preselectedFacility) {
+      setFacilityId(preselectedFacility.facility_id);
+    } else if (facilities.length > 0) {
+      setFacilityId(facilities[0].facility_id);
+    }
+  }, [preselectedFacility, facilities]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !description.trim()) {

@@ -120,6 +120,16 @@ export function formatCurrency(amount: number): string {
 }
 
 /**
+ * Format Date object to local YYYY-MM-DD
+ */
+export function toLocalDateString(d: Date = new Date()): string {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+/**
  * Safely format date into YYYY-MM-DD
  */
 export function formatDate(dateStr: string | Date): string {
@@ -127,7 +137,7 @@ export function formatDate(dateStr: string | Date): string {
   if (typeof dateStr === 'string') {
     return dateStr.replace('T', ' ').substring(0, 10);
   }
-  return dateStr.toISOString().split('T')[0];
+  return toLocalDateString(dateStr);
 }
 
 /**

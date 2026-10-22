@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Facility, Booking } from '../types.ts';
 import { api } from '../api.ts';
-import { calculateBookingPrice, formatCurrency, isParticipantCountValid, formatDateTimeRange } from '../utils/rules.ts';
+import { calculateBookingPrice, formatCurrency, isParticipantCountValid, formatDateTimeRange, toLocalDateString } from '../utils/rules.ts';
 import { X, Calendar, Clock, Users, FileText, AlertCircle, ShieldAlert } from 'lucide-react';
 
 interface BookingModalProps {
@@ -13,15 +13,16 @@ interface BookingModalProps {
 export const BookingModal: React.FC<BookingModalProps> = ({ facility, onClose, onSuccess }) => {
   if (!facility) return null;
 
-  // Default: tomorrow 10:00 to 11:30
+  // Default: tomorrow 10:00 to 11:00
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
-  const defaultDate = tomorrow.toISOString().split('T')[0];
+  const defaultDate = toLocalDateString(tomorrow);
+  const minDate = toLocalDateString(new Date());
 
   const [date, setDate] = useState(defaultDate);
   const [startTime, setStartTime] = useState('10:00');
   const [endTime, setEndTime] = useState('11:00');
-  const [participantCount, setParticipantCount] = useState(2);
+  const [participantCount, setParticipantCount] = useState(Math.min(2, facility.capacity) || 1);
   const [purpose, setPurpose] = useState('Campus Recreation & Training');
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -30,7 +31,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ facility, onClose, o
   // Quick preset helper
   const setQuickDuration = (minutes: number) => {
     const [h, m] = startTime.split(':').map(Number);
-    const startMins = h * 60 + m;
+    const startMins = h * 60 + (m || 0);
     const endMins = startMins + minutes;
     const endH = Math.floor(endMins / 60) % 24;
     const endM = endMins % 60;
@@ -52,24 +53,24 @@ export const BookingModal: React.FC<BookingModalProps> = ({ facility, onClose, o
     }
   };
 
-  // Price calculation
-  const startDateTimeStr = `${date}T${startTime}:00`;
-  const endDateTimeStr = `${date}T${endTime}:00`;
-
+  // Robust Price and Duration calculation
   let estimatedPrice = 0;
   let durationMinutes = 0;
   let invalidTimeOrder = false;
-  try {
-    const s = new Date(startDateTimeStr);
-    const e = new Date(endDateTimeStr);
-    if (s >= e) {
+
+  const [sh, sm] = startTime.split(':').map(Number);
+  const [eh, em] = endTime.split(':').map(Number);
+  if (isNaN(sh) || isNaN(sm) || isNaN(eh) || isNaN(em)) {
+    invalidTimeOrder = true;
+  } else {
+    const sMinutes = sh * 60 + sm;
+    const eMinutes = eh * 60 + em;
+    if (sMinutes >= eMinutes) {
       invalidTimeOrder = true;
     } else {
-      durationMinutes = Math.round((e.getTime() - s.getTime()) / 60000);
-      estimatedPrice = calculateBookingPrice(s, e, Number(facility.hourly_rate));
+      durationMinutes = eMinutes - sMinutes;
+      estimatedPrice = Math.round(((durationMinutes / 60) * Number(facility.hourly_rate)) * 100) / 100;
     }
-  } catch {
-    invalidTimeOrder = true;
   }
 
   const isCapacityExceeded = !isParticipantCountValid(participantCount, facility.capacity);
@@ -187,7 +188,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ facility, onClose, o
               type="date"
               required
               value={date}
-              min={new Date().toISOString().split('T')[0]}
+              min={minDate}
               onChange={(e) => setDate(e.target.value)}
               className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white focus:outline-none focus:border-emerald-500"
             />

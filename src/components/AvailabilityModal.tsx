@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Facility } from '../types.ts';
 import { api } from '../api.ts';
-import { formatTime, formatCurrency } from '../utils/rules.ts';
+import { formatTime, formatCurrency, toLocalDateString } from '../utils/rules.ts';
 import { X, Calendar, Clock, CheckCircle, AlertTriangle, ArrowRight } from 'lucide-react';
 
 interface AvailabilityModalProps {
@@ -17,7 +17,7 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
 }) => {
   if (!facility) return null;
 
-  const todayStr = new Date().toISOString().split('T')[0];
+  const todayStr = toLocalDateString(new Date());
   const [selectedDate, setSelectedDate] = useState(todayStr);
   const [loading, setLoading] = useState(true);
   const [availabilityData, setAvailabilityData] = useState<any>(null);

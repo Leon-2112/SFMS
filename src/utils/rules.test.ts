@@ -6,6 +6,8 @@ import {
   isParticipantCountValid,
   isWithinOperatingHours,
   canUserCancelBooking,
+  toLocalDateString,
+  formatDate,
 } from './rules.ts';
 
 test('Overlap Logic: Exactly adjacent intervals do NOT overlap [10:00-11:00) and [11:00-12:00)', () => {
@@ -90,3 +92,12 @@ test('Cancellation authorization enforces ownership and state rules', () => {
   assert.equal(canUserCancelBooking('MEMBER', 4, 4, 'CANCELLED'), false);
   assert.equal(canUserCancelBooking('MEMBER', 4, 4, 'REJECTED'), false);
 });
+
+test('Local date formatting formats year, month, and day accurately', () => {
+  const d = new Date(2026, 9, 23); // Oct 23, 2026
+  const formatted = toLocalDateString(d);
+  assert.equal(formatted, '2026-10-23');
+  assert.equal(formatDate(d), '2026-10-23');
+  assert.equal(formatDate('2026-10-23 14:00:00'), '2026-10-23');
+});
+

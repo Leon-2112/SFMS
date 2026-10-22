@@ -32,6 +32,9 @@ export const FacilityCard: React.FC<FacilityCardProps> = ({
             src={facility.image_url}
             alt={facility.name}
             referrerPolicy="no-referrer"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = '/src/assets/images/badminton_court_b.webp';
+            }}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
           />
         ) : (
