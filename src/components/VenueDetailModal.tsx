@@ -72,6 +72,7 @@ export const VenueDetailModal: React.FC<VenueDetailModalProps> = ({
             <img
               src={facility.image_url}
               alt={facility.name}
+              referrerPolicy="no-referrer"
               className="w-full h-full object-cover opacity-90"
             />
           ) : (

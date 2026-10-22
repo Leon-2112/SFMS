@@ -248,7 +248,7 @@ const SEED_FACILITIES: MemoryFacility[] = [
     hourly_rate: 300.0,
     facility_status: 'ACTIVE',
     description: 'Adjacent tournament badminton court with electronic scoring panel.',
-    image_url: 'https://images.unsplash.com/photo-1613918108466-292b78a8ef95?auto=format&fit=crop&w=1200&q=80',
+    image_url: '/src/assets/images/badminton_court_b.webp',
     created_at: '2026-01-01 08:00:00',
   },
   {
@@ -403,6 +403,35 @@ class InMemoryDatabase {
       return [{ alive: 1 }];
     }
 
+    // Dashboard summary
+    if (/total_facilities/i.test(normalized) && /active_facilities/i.test(normalized)) {
+      const total_facilities = this.facilities.length;
+      const active_facilities = this.facilities.filter((f) => f.facility_status === 'ACTIVE').length;
+      const total_bookings = this.bookings.length;
+      const pending_bookings = this.bookings.filter((b) => b.status === 'PENDING').length;
+      const approved_bookings = this.bookings.filter((b) => b.status === 'APPROVED').length;
+      const total_revenue_estimate = this.bookings
+        .filter((b) => b.status === 'APPROVED' || b.status === 'COMPLETED')
+        .reduce((sum, b) => sum + Number(b.total_price), 0);
+      const open_maintenance_issues = this.maintenanceReports.filter((r) => r.status !== 'RESOLVED' && r.status !== 'CLOSED').length;
+      const active_work_orders = this.workOrders.filter((w) => ['OPEN', 'ASSIGNED', 'IN_PROGRESS'].includes(w.status)).length;
+      const registered_members = this.users.filter((u) => u.role === 'MEMBER').length;
+      const pending_user_registrations = this.users.filter((u) => u.account_status === 'PENDING_APPROVAL').length;
+
+      return [{
+        total_facilities,
+        active_facilities,
+        total_bookings,
+        pending_bookings,
+        approved_bookings,
+        total_revenue_estimate,
+        open_maintenance_issues,
+        active_work_orders,
+        registered_members,
+        pending_user_registrations,
+      }];
+    }
+
     // 2. Active demo users
     if (/SELECT user_id, full_name, email, role, department FROM users WHERE account_status = "ACTIVE"/i.test(normalized) ||
         /FROM users WHERE account_status = 'ACTIVE'/i.test(normalized)) {
@@ -433,7 +462,7 @@ class InMemoryDatabase {
     }
 
     // 5. Pending users list
-    if (/FROM users WHERE account_status = 'PENDING_APPROVAL'/i.test(normalized)) {
+    if (/^SELECT\s+user_id.+FROM users WHERE account_status = 'PENDING_APPROVAL'/i.test(normalized)) {
       return this.users
         .filter((u) => u.account_status === 'PENDING_APPROVAL')
         .sort((a, b) => b.created_at.localeCompare(a.created_at))

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../api.ts';
-import { Booking, Facility, Equipment, MaintenanceReport, DashboardSummary, SportType, OperatingHour } from '../types.ts';
+import { Booking, Facility, Equipment, MaintenanceReport, DashboardSummary, SportType, OperatingHour, User } from '../types.ts';
 import { formatCurrency, formatDateTimeRange } from '../utils/rules.ts';
 import {
   ShieldCheck,
@@ -20,15 +20,18 @@ import {
   AlertTriangle,
   Download,
   Trash2,
+  UserCheck,
+  UserX,
 } from 'lucide-react';
 
 export const AdminPortal: React.FC = () => {
-  const [subTab, setSubTab] = useState<'queue' | 'facilities' | 'equipment' | 'maintenance' | 'reports'>('queue');
+  const [subTab, setSubTab] = useState<'queue' | 'users' | 'facilities' | 'equipment' | 'maintenance' | 'reports'>('queue');
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   // Data states
   const [bookings, setBookings] = useState<Booking[]>([]);
+  const [pendingUsers, setPendingUsers] = useState<User[]>([]);
   const [facilities, setFacilities] = useState<Facility[]>([]);
   const [equipmentList, setEquipmentList] = useState<Equipment[]>([]);
   const [reports, setReports] = useState<MaintenanceReport[]>([]);
@@ -80,7 +83,7 @@ export const AdminPortal: React.FC = () => {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [b, f, eq, rep, staff, sp, sum] = await Promise.all([
+      const [b, f, eq, rep, staff, sp, sum, pUsers] = await Promise.all([
         api.getAllBookings(),
         api.getFacilities(),
         api.getEquipment(),
@@ -88,6 +91,7 @@ export const AdminPortal: React.FC = () => {
         api.getMaintenanceStaffList(),
         api.getSportTypes(),
         api.getDashboardSummary(),
+        api.getPendingUsers().catch(() => []),
       ]);
       setBookings(b);
       setFacilities(f);
@@ -96,10 +100,24 @@ export const AdminPortal: React.FC = () => {
       setStaffList(staff);
       setSports(sp);
       setSummary(sum);
+      setPendingUsers(pUsers || []);
     } catch (err: any) {
       console.error('Error loading admin data:', err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleUserDecision = async (userId: number, status: 'ACTIVE' | 'REJECTED') => {
+    try {
+      const res = await api.decideUser(userId, status);
+      setMsg({
+        type: 'success',
+        text: res.message || `User #${userId} registration has been ${status === 'ACTIVE' ? 'approved and activated' : 'rejected'}.`,
+      });
+      loadData();
+    } catch (err: any) {
+      setMsg({ type: 'error', text: err.message || 'Failed to update user registration status.' });
     }
   };
 
@@ -292,10 +310,14 @@ export const AdminPortal: React.FC = () => {
         </p>
 
         {summary && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mt-5">
             <div className="p-3.5 rounded-xl bg-slate-850/80 border border-slate-700/60">
               <span className="text-[11px] text-slate-400 block">Pending Requests</span>
               <span className="text-xl font-extrabold text-amber-400">{summary.pending_bookings}</span>
+            </div>
+            <div className="p-3.5 rounded-xl bg-slate-850/80 border border-slate-700/60">
+              <span className="text-[11px] text-slate-400 block">Pending Users</span>
+              <span className="text-xl font-extrabold text-indigo-400">{pendingUsers.length}</span>
             </div>
             <div className="p-3.5 rounded-xl bg-slate-850/80 border border-slate-700/60">
               <span className="text-[11px] text-slate-400 block">Active Facilities</span>
@@ -344,6 +366,18 @@ export const AdminPortal: React.FC = () => {
         >
           <Clock className="w-3.5 h-3.5 text-amber-400" />
           Approvals Queue ({pendingBookings.length})
+        </button>
+
+        <button
+          onClick={() => setSubTab('users')}
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
+            subTab === 'users'
+              ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 shadow-sm'
+              : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+          }`}
+        >
+          <Users className="w-3.5 h-3.5 text-indigo-400" />
+          User Registrations ({pendingUsers.length})
         </button>
 
         <button
@@ -459,6 +493,88 @@ export const AdminPortal: React.FC = () => {
                             className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-rose-600/80 hover:bg-rose-500 text-white font-bold text-xs transition-colors"
                           >
                             <XCircle className="w-3.5 h-3.5" />
+                            Reject
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Subtab: User Registrations */}
+      {subTab === 'users' && (
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-sm font-bold text-white">Pending User Account Registrations</h3>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Review and approve student, faculty, and maintenance staff registration requests.
+              </p>
+            </div>
+            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300">
+              {pendingUsers.length} pending review
+            </span>
+          </div>
+
+          {pendingUsers.length === 0 ? (
+            <div className="p-12 text-center rounded-2xl bg-slate-850/50 border border-slate-800">
+              <CheckCircle className="w-10 h-10 text-emerald-500 mx-auto mb-2 opacity-80" />
+              <p className="text-sm font-bold text-slate-300">No Pending Registrations</p>
+              <p className="text-xs text-slate-500 mt-1">All campus membership requests have been reviewed.</p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto rounded-2xl border border-slate-700/80 bg-slate-850">
+              <table className="w-full text-left text-xs text-slate-300">
+                <thead className="bg-slate-900 border-b border-slate-700 text-slate-400 uppercase text-[10px] font-bold">
+                  <tr>
+                    <th className="py-3 px-4">Applicant</th>
+                    <th className="py-3 px-4">Requested Role</th>
+                    <th className="py-3 px-4">Department / Affiliation</th>
+                    <th className="py-3 px-4">Contact Phone</th>
+                    <th className="py-3 px-4">Submitted Date</th>
+                    <th className="py-3 px-4 text-right">Review Action</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-800 font-medium">
+                  {pendingUsers.map((u) => (
+                    <tr key={u.user_id} className="hover:bg-slate-800/40 transition-colors">
+                      <td className="py-3 px-4">
+                        <span className="font-bold text-white block">{u.full_name}</span>
+                        <span className="text-[11px] text-slate-400">{u.email}</span>
+                      </td>
+                      <td className="py-3 px-4">
+                        <span
+                          className={`text-[10px] font-bold px-2 py-0.5 rounded border uppercase ${
+                            u.role === 'MAINTENANCE_STAFF'
+                              ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40'
+                              : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+                          }`}
+                        >
+                          {u.role.replace('_', ' ')}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 text-slate-300">{u.department || '—'}</td>
+                      <td className="py-3 px-4 text-slate-400">{u.phone || '—'}</td>
+                      <td className="py-3 px-4 text-slate-400 text-[11px]">{u.created_at || 'Recently'}</td>
+                      <td className="py-3 px-4 text-right">
+                        <div className="flex items-center justify-end gap-1.5">
+                          <button
+                            onClick={() => handleUserDecision(u.user_id, 'ACTIVE')}
+                            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-colors shadow-sm"
+                          >
+                            <UserCheck className="w-3.5 h-3.5" />
+                            Approve & Activate
+                          </button>
+                          <button
+                            onClick={() => handleUserDecision(u.user_id, 'REJECTED')}
+                            className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-rose-600/80 hover:bg-rose-500 text-white font-bold text-xs transition-colors"
+                          >
+                            <UserX className="w-3.5 h-3.5" />
                             Reject
                           </button>
                         </div>
