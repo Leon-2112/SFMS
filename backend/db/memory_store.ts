@@ -193,7 +193,7 @@ const SEED_FACILITIES: MemoryFacility[] = [
     location: 'Sports Complex - Building C, Lower Level',
     is_indoor: 1,
     capacity: 50,
-    hourly_rate: 500.0,
+    hourly_rate: 2500.0,
     facility_status: 'ACTIVE',
     description: 'Heated 10-lane 50m pool with electronic timing and spectator gallery.',
     image_url: 'https://images.unsplash.com/photo-1519315901367-f34ff9154487?auto=format&fit=crop&w=1200&q=80',
@@ -206,7 +206,7 @@ const SEED_FACILITIES: MemoryFacility[] = [
     location: 'Fieldhouse North Wing, Floor 1',
     is_indoor: 1,
     capacity: 30,
-    hourly_rate: 600.0,
+    hourly_rate: 3000.0,
     facility_status: 'ACTIVE',
     description: 'FIBA regulation hardwood basketball arena with electronic shot clocks.',
     image_url: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1200&q=80',
@@ -219,7 +219,7 @@ const SEED_FACILITIES: MemoryFacility[] = [
     location: 'Fieldhouse North Wing, Annex B',
     is_indoor: 1,
     capacity: 25,
-    hourly_rate: 450.0,
+    hourly_rate: 2250.0,
     facility_status: 'ACTIVE',
     description: 'Multi-purpose practice basketball court with adjustable rim heights.',
     image_url: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80',
@@ -232,7 +232,7 @@ const SEED_FACILITIES: MemoryFacility[] = [
     location: 'Racquet Sports Center, Hall 1',
     is_indoor: 1,
     capacity: 8,
-    hourly_rate: 300.0,
+    hourly_rate: 1500.0,
     facility_status: 'ACTIVE',
     description: 'Tournament-spec Yonex synthetic mat court with anti-glare LED lighting.',
     image_url: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=1200&q=80',
@@ -245,7 +245,7 @@ const SEED_FACILITIES: MemoryFacility[] = [
     location: 'Racquet Sports Center, Hall 1',
     is_indoor: 1,
     capacity: 8,
-    hourly_rate: 300.0,
+    hourly_rate: 1500.0,
     facility_status: 'ACTIVE',
     description: 'Adjacent tournament badminton court with electronic scoring panel.',
     image_url: '/src/assets/images/badminton_court_b.webp',
@@ -258,7 +258,7 @@ const SEED_FACILITIES: MemoryFacility[] = [
     location: 'East Campus Athletic Grounds',
     is_indoor: 0,
     capacity: 4,
-    hourly_rate: 350.0,
+    hourly_rate: 1750.0,
     facility_status: 'ACTIVE',
     description: 'Hard court with floodlight system for evening training sessions.',
     image_url: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=1200&q=80',
@@ -271,7 +271,7 @@ const SEED_FACILITIES: MemoryFacility[] = [
     location: 'East Campus Athletic Grounds',
     is_indoor: 0,
     capacity: 4,
-    hourly_rate: 350.0,
+    hourly_rate: 1750.0,
     facility_status: 'ACTIVE',
     description: 'Standard Plexipave acrylic hard court alongside Court 1.',
     image_url: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1200&q=80',
@@ -284,7 +284,7 @@ const SEED_FACILITIES: MemoryFacility[] = [
     location: 'Student Recreation Lawn South',
     is_indoor: 0,
     capacity: 12,
-    hourly_rate: 250.0,
+    hourly_rate: 1250.0,
     facility_status: 'ACTIVE',
     description: 'White sand outdoor regulation court with safety netting.',
     image_url: 'https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=1200&q=80',
@@ -297,7 +297,7 @@ const SEED_FACILITIES: MemoryFacility[] = [
     location: 'Racquet Sports Center, Lower Concourse',
     is_indoor: 1,
     capacity: 4,
-    hourly_rate: 400.0,
+    hourly_rate: 2000.0,
     facility_status: 'MAINTENANCE',
     description: 'High-speed glass-back squash court currently undergoing floor sanding.',
     image_url: 'https://images.unsplash.com/photo-1558365849-6ebd8b0454b2?auto=format&fit=crop&w=1200&q=80',
@@ -334,19 +334,19 @@ const SEED_EQUIPMENT: MemoryEquipment[] = [
 ];
 
 const SEED_BOOKINGS: MemoryBooking[] = [
-  { booking_id: 1, member_id: 4, facility_id: 2, start_at: '2026-10-16 09:00:00', end_at: '2026-10-16 10:00:00', participant_count: 10, purpose: 'Intramural Basketball Practice', hourly_rate_at_booking: 20.0, total_price: 20.0, status: 'APPROVED', decided_by: 1, decision_note: 'Approved for university intramurals.', decided_at: '2026-10-14 10:00:00', created_at: '2026-10-13 14:00:00' },
-  { booking_id: 2, member_id: 5, facility_id: 2, start_at: '2026-10-16 10:00:00', end_at: '2026-10-16 11:30:00', participant_count: 12, purpose: 'Engineering Society Pick-up Game', hourly_rate_at_booking: 20.0, total_price: 30.0, status: 'APPROVED', decided_by: 1, decision_note: 'Approved, adjacent to intramural slot.', decided_at: '2026-10-14 11:00:00', created_at: '2026-10-14 08:30:00' },
-  { booking_id: 3, member_id: 6, facility_id: 2, start_at: '2026-10-16 14:00:00', end_at: '2026-10-16 16:00:00', participant_count: 8, purpose: 'Women Basketball Club Training', hourly_rate_at_booking: 20.0, total_price: 40.0, status: 'PENDING', decided_by: null, decision_note: null, decided_at: null, created_at: '2026-10-15 09:00:00' },
-  { booking_id: 4, member_id: 4, facility_id: 4, start_at: '2026-10-16 18:00:00', end_at: '2026-10-16 19:30:00', participant_count: 4, purpose: 'Evening Doubles Match', hourly_rate_at_booking: 10.0, total_price: 15.0, status: 'APPROVED', decided_by: 1, decision_note: 'Confirmed court A booking.', decided_at: '2026-10-14 12:00:00', created_at: '2026-10-14 09:00:00' },
-  { booking_id: 5, member_id: 5, facility_id: 4, start_at: '2026-10-17 10:00:00', end_at: '2026-10-17 11:00:00', participant_count: 2, purpose: 'Singles Ladder Tournament Match', hourly_rate_at_booking: 10.0, total_price: 10.0, status: 'PENDING', decided_by: null, decision_note: null, decided_at: null, created_at: '2026-10-15 08:00:00' },
-  { booking_id: 6, member_id: 6, facility_id: 1, start_at: '2026-10-17 07:00:00', end_at: '2026-10-17 08:30:00', participant_count: 15, purpose: 'Swim Club Masters Conditioning', hourly_rate_at_booking: 25.0, total_price: 37.5, status: 'APPROVED', decided_by: 1, decision_note: 'Lifeguards on duty confirmed.', decided_at: '2026-10-14 15:00:00', created_at: '2026-10-13 11:00:00' },
-  { booking_id: 7, member_id: 4, facility_id: 1, start_at: '2026-10-18 16:00:00', end_at: '2026-10-18 17:30:00', participant_count: 6, purpose: 'Water Polo Skills Clinic', hourly_rate_at_booking: 25.0, total_price: 37.5, status: 'PENDING', decided_by: null, decision_note: null, decided_at: null, created_at: '2026-10-15 09:30:00' },
-  { booking_id: 8, member_id: 5, facility_id: 6, start_at: '2026-10-18 09:00:00', end_at: '2026-10-18 10:30:00', participant_count: 2, purpose: 'Grad Student Tennis Friendly', hourly_rate_at_booking: 12.0, total_price: 18.0, status: 'APPROVED', decided_by: 1, decision_note: 'Authorized court reservation.', decided_at: '2026-10-14 16:00:00', created_at: '2026-10-13 16:45:00' },
-  { booking_id: 9, member_id: 4, facility_id: 2, start_at: '2026-09-10 14:00:00', end_at: '2026-09-10 16:00:00', participant_count: 12, purpose: 'September Opening Tournament', hourly_rate_at_booking: 20.0, total_price: 40.0, status: 'COMPLETED', decided_by: 1, decision_note: 'Completed event', decided_at: '2026-09-08 10:00:00', created_at: '2026-09-07 10:00:00' },
-  { booking_id: 10, member_id: 5, facility_id: 1, start_at: '2026-09-15 08:00:00', end_at: '2026-09-15 10:00:00', participant_count: 20, purpose: 'Fall Swim Time Trials', hourly_rate_at_booking: 25.0, total_price: 50.0, status: 'COMPLETED', decided_by: 1, decision_note: 'Completed event', decided_at: '2026-09-12 11:00:00', created_at: '2026-09-11 09:00:00' },
-  { booking_id: 11, member_id: 6, facility_id: 4, start_at: '2026-09-22 17:00:00', end_at: '2026-09-22 19:00:00', participant_count: 4, purpose: 'Badminton Intra-Dept Scrimmage', hourly_rate_at_booking: 10.0, total_price: 20.0, status: 'COMPLETED', decided_by: 1, decision_note: 'Completed event', decided_at: '2026-09-20 10:00:00', created_at: '2026-09-19 14:00:00' },
-  { booking_id: 12, member_id: 6, facility_id: 6, start_at: '2026-10-16 11:00:00', end_at: '2026-10-16 13:00:00', participant_count: 4, purpose: 'Requested Tennis Clinic', hourly_rate_at_booking: 12.0, total_price: 24.0, status: 'REJECTED', decided_by: 1, decision_note: 'Facility allocated to collegiate athletics team.', decided_at: '2026-10-14 17:00:00', created_at: '2026-10-14 14:00:00' },
-  { booking_id: 13, member_id: 5, facility_id: 4, start_at: '2026-10-16 14:00:00', end_at: '2026-10-16 15:00:00', participant_count: 2, purpose: 'Personal Practice', hourly_rate_at_booking: 10.0, total_price: 10.0, status: 'CANCELLED', decided_by: null, decision_note: 'Cancelled by user due to schedule conflict.', decided_at: '2026-10-15 07:00:00', created_at: '2026-10-14 18:00:00' },
+  { booking_id: 1, member_id: 4, facility_id: 2, start_at: '2026-10-16 09:00:00', end_at: '2026-10-16 10:00:00', participant_count: 10, purpose: 'Intramural Basketball Practice', hourly_rate_at_booking: 3000.0, total_price: 3000.0, status: 'APPROVED', decided_by: 1, decision_note: 'Approved for university intramurals.', decided_at: '2026-10-14 10:00:00', created_at: '2026-10-13 14:00:00' },
+  { booking_id: 2, member_id: 5, facility_id: 2, start_at: '2026-10-16 10:00:00', end_at: '2026-10-16 11:30:00', participant_count: 12, purpose: 'Engineering Society Pick-up Game', hourly_rate_at_booking: 3000.0, total_price: 4500.0, status: 'APPROVED', decided_by: 1, decision_note: 'Approved, adjacent to intramural slot.', decided_at: '2026-10-14 11:00:00', created_at: '2026-10-14 08:30:00' },
+  { booking_id: 3, member_id: 6, facility_id: 2, start_at: '2026-10-16 14:00:00', end_at: '2026-10-16 16:00:00', participant_count: 8, purpose: 'Women Basketball Club Training', hourly_rate_at_booking: 3000.0, total_price: 6000.0, status: 'PENDING', decided_by: null, decision_note: null, decided_at: null, created_at: '2026-10-15 09:00:00' },
+  { booking_id: 4, member_id: 4, facility_id: 4, start_at: '2026-10-16 18:00:00', end_at: '2026-10-16 19:30:00', participant_count: 4, purpose: 'Evening Doubles Match', hourly_rate_at_booking: 1500.0, total_price: 2250.0, status: 'APPROVED', decided_by: 1, decision_note: 'Confirmed court A booking.', decided_at: '2026-10-14 12:00:00', created_at: '2026-10-14 09:00:00' },
+  { booking_id: 5, member_id: 5, facility_id: 4, start_at: '2026-10-17 10:00:00', end_at: '2026-10-17 11:00:00', participant_count: 2, purpose: 'Singles Ladder Tournament Match', hourly_rate_at_booking: 1500.0, total_price: 1500.0, status: 'PENDING', decided_by: null, decision_note: null, decided_at: null, created_at: '2026-10-15 08:00:00' },
+  { booking_id: 6, member_id: 6, facility_id: 1, start_at: '2026-10-17 07:00:00', end_at: '2026-10-17 08:30:00', participant_count: 15, purpose: 'Swim Club Masters Conditioning', hourly_rate_at_booking: 2500.0, total_price: 3750.0, status: 'APPROVED', decided_by: 1, decision_note: 'Lifeguards on duty confirmed.', decided_at: '2026-10-14 15:00:00', created_at: '2026-10-13 11:00:00' },
+  { booking_id: 7, member_id: 4, facility_id: 1, start_at: '2026-10-18 16:00:00', end_at: '2026-10-18 17:30:00', participant_count: 6, purpose: 'Water Polo Skills Clinic', hourly_rate_at_booking: 2500.0, total_price: 3750.0, status: 'PENDING', decided_by: null, decision_note: null, decided_at: null, created_at: '2026-10-15 09:30:00' },
+  { booking_id: 8, member_id: 5, facility_id: 6, start_at: '2026-10-18 09:00:00', end_at: '2026-10-18 10:30:00', participant_count: 2, purpose: 'Grad Student Tennis Friendly', hourly_rate_at_booking: 1750.0, total_price: 2625.0, status: 'APPROVED', decided_by: 1, decision_note: 'Authorized court reservation.', decided_at: '2026-10-14 16:00:00', created_at: '2026-10-13 16:45:00' },
+  { booking_id: 9, member_id: 4, facility_id: 2, start_at: '2026-09-10 14:00:00', end_at: '2026-09-10 16:00:00', participant_count: 12, purpose: 'September Opening Tournament', hourly_rate_at_booking: 3000.0, total_price: 6000.0, status: 'COMPLETED', decided_by: 1, decision_note: 'Completed event', decided_at: '2026-09-08 10:00:00', created_at: '2026-09-07 10:00:00' },
+  { booking_id: 10, member_id: 5, facility_id: 1, start_at: '2026-09-15 08:00:00', end_at: '2026-09-15 10:00:00', participant_count: 20, purpose: 'Fall Swim Time Trials', hourly_rate_at_booking: 2500.0, total_price: 5000.0, status: 'COMPLETED', decided_by: 1, decision_note: 'Completed event', decided_at: '2026-09-12 11:00:00', created_at: '2026-09-11 09:00:00' },
+  { booking_id: 11, member_id: 6, facility_id: 4, start_at: '2026-09-22 17:00:00', end_at: '2026-09-22 19:00:00', participant_count: 4, purpose: 'Badminton Intra-Dept Scrimmage', hourly_rate_at_booking: 1500.0, total_price: 3000.0, status: 'COMPLETED', decided_by: 1, decision_note: 'Completed event', decided_at: '2026-09-20 10:00:00', created_at: '2026-09-19 14:00:00' },
+  { booking_id: 12, member_id: 6, facility_id: 6, start_at: '2026-10-16 11:00:00', end_at: '2026-10-16 13:00:00', participant_count: 4, purpose: 'Requested Tennis Clinic', hourly_rate_at_booking: 1750.0, total_price: 3500.0, status: 'REJECTED', decided_by: 1, decision_note: 'Facility allocated to collegiate athletics team.', decided_at: '2026-10-14 17:00:00', created_at: '2026-10-14 14:00:00' },
+  { booking_id: 13, member_id: 5, facility_id: 4, start_at: '2026-10-16 14:00:00', end_at: '2026-10-16 15:00:00', participant_count: 2, purpose: 'Personal Practice', hourly_rate_at_booking: 1500.0, total_price: 1500.0, status: 'CANCELLED', decided_by: null, decision_note: 'Cancelled by user due to schedule conflict.', decided_at: '2026-10-15 07:00:00', created_at: '2026-10-14 18:00:00' },
 ];
 
 const SEED_MAINTENANCE_REPORTS: MemoryMaintenanceReport[] = [
@@ -390,7 +390,17 @@ class InMemoryDatabase {
   private nextAuditId = 5;
 
   private nowIso(): string {
-    return new Date().toISOString().replace('T', ' ').substring(0, 19);
+    const formatter = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Asia/Kolkata',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    });
+    return formatter.format(new Date()).replace(', ', ' ');
   }
 
   // Execute query against in-memory state

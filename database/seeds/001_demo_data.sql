@@ -49,15 +49,15 @@ VALUES
 -- ----------------------------------------------------------------------------
 INSERT INTO facilities (facility_id, sport_type_id, name, location, is_indoor, capacity, hourly_rate, facility_status, description, image_url)
 VALUES
-(1, 4, 'Olympic Aquatics Center', 'Sports Complex - Building C, Lower Level', TRUE, 50, 500.00, 'ACTIVE', 'Heated 10-lane 50m pool with electronic timing and spectator gallery.', 'https://images.unsplash.com/photo-1519315901367-f34ff9154487?auto=format&fit=crop&w=1200&q=80'),
-(2, 2, 'Varsity Court 1 - Main Arena', 'Fieldhouse North Wing, Floor 1', TRUE, 30, 600.00, 'ACTIVE', 'FIBA regulation hardwood basketball arena with electronic shot clocks.', 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1200&q=80'),
-(3, 2, 'Varsity Court 2 - West Annex', 'Fieldhouse North Wing, Annex B', TRUE, 25, 450.00, 'ACTIVE', 'Multi-purpose practice basketball court with adjustable rim heights.', 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80'),
-(4, 1, 'Badminton Hall Court A', 'Racquet Sports Center, Hall 1', TRUE, 8, 300.00, 'ACTIVE', 'Tournament-spec Yonex synthetic mat court with anti-glare LED lighting.', 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=1200&q=80'),
-(5, 1, 'Badminton Hall Court B', 'Racquet Sports Center, Hall 1', TRUE, 8, 300.00, 'ACTIVE', 'Adjacent tournament badminton court with electronic scoring panel.', '/src/assets/images/badminton_court_b.webp'),
-(6, 3, 'Outdoor Tennis Court 1', 'East Campus Athletic Grounds', FALSE, 4, 350.00, 'ACTIVE', 'Hard court with floodlight system for evening training sessions.', 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=1200&q=80'),
-(7, 3, 'Outdoor Tennis Court 2', 'East Campus Athletic Grounds', FALSE, 4, 350.00, 'ACTIVE', 'Standard Plexipave acrylic hard court alongside Court 1.', 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1200&q=80'),
-(8, 5, 'South Beach Volleyball Court', 'Student Recreation Lawn South', FALSE, 12, 250.00, 'ACTIVE', 'White sand outdoor regulation court with safety netting.', 'https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=1200&q=80'),
-(9, 6, 'Squash Court Alpha', 'Racquet Sports Center, Lower Concourse', TRUE, 4, 400.00, 'MAINTENANCE', 'High-speed glass-back squash court currently undergoing floor sanding.', 'https://images.unsplash.com/photo-1558365849-6ebd8b0454b2?auto=format&fit=crop&w=1200&q=80');
+(1, 4, 'Olympic Aquatics Center', 'Sports Complex - Building C, Lower Level', TRUE, 50, 2500.00, 'ACTIVE', 'Heated 10-lane 50m pool with electronic timing and spectator gallery.', 'https://images.unsplash.com/photo-1519315901367-f34ff9154487?auto=format&fit=crop&w=1200&q=80'),
+(2, 2, 'Varsity Court 1 - Main Arena', 'Fieldhouse North Wing, Floor 1', TRUE, 30, 3000.00, 'ACTIVE', 'FIBA regulation hardwood basketball arena with electronic shot clocks.', 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1200&q=80'),
+(3, 2, 'Varsity Court 2 - West Annex', 'Fieldhouse North Wing, Annex B', TRUE, 25, 2250.00, 'ACTIVE', 'Multi-purpose practice basketball court with adjustable rim heights.', 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1200&q=80'),
+(4, 1, 'Badminton Hall Court A', 'Racquet Sports Center, Hall 1', TRUE, 8, 1500.00, 'ACTIVE', 'Tournament-spec Yonex synthetic mat court with anti-glare LED lighting.', 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=1200&q=80'),
+(5, 1, 'Badminton Hall Court B', 'Racquet Sports Center, Hall 1', TRUE, 8, 1500.00, 'ACTIVE', 'Adjacent tournament badminton court with electronic scoring panel.', '/src/assets/images/badminton_court_b.webp'),
+(6, 3, 'Outdoor Tennis Court 1', 'East Campus Athletic Grounds', FALSE, 4, 1750.00, 'ACTIVE', 'Hard court with floodlight system for evening training sessions.', 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=1200&q=80'),
+(7, 3, 'Outdoor Tennis Court 2', 'East Campus Athletic Grounds', FALSE, 4, 1750.00, 'ACTIVE', 'Standard Plexipave acrylic hard court alongside Court 1.', 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1200&q=80'),
+(8, 5, 'South Beach Volleyball Court', 'Student Recreation Lawn South', FALSE, 12, 1250.00, 'ACTIVE', 'White sand outdoor regulation court with safety netting.', 'https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=1200&q=80'),
+(9, 6, 'Squash Court Alpha', 'Racquet Sports Center, Lower Concourse', TRUE, 4, 2000.00, 'MAINTENANCE', 'High-speed glass-back squash court currently undergoing floor sanding.', 'https://images.unsplash.com/photo-1558365849-6ebd8b0454b2?auto=format&fit=crop&w=1200&q=80');
 
 -- ----------------------------------------------------------------------------
 -- 4. SEED OPERATING HOURS (7 days a week for all facilities: 06:00 - 22:00)
@@ -109,29 +109,29 @@ INSERT INTO bookings (
 )
 VALUES
 -- Facility 2: Court 1
-(1, 4, 2, '2026-10-16 09:00:00', '2026-10-16 10:00:00', 10, 'Intramural Basketball Practice', 20.00, 20.00, 'APPROVED', 1, 'Approved for university intramurals.', '2026-10-14 10:00:00', '2026-10-13 14:00:00'),
-(2, 5, 2, '2026-10-16 10:00:00', '2026-10-16 11:30:00', 12, 'Engineering Society Pick-up Game', 20.00, 30.00, 'APPROVED', 1, 'Approved, adjacent to intramural slot.', '2026-10-14 11:00:00', '2026-10-14 08:30:00'),
-(3, 6, 2, '2026-10-16 14:00:00', '2026-10-16 16:00:00', 8, 'Women Basketball Club Training', 20.00, 40.00, 'PENDING', NULL, NULL, NULL, '2026-10-15 09:00:00'),
+(1, 4, 2, '2026-10-16 09:00:00', '2026-10-16 10:00:00', 10, 'Intramural Basketball Practice', 3000.00, 3000.00, 'APPROVED', 1, 'Approved for university intramurals.', '2026-10-14 10:00:00', '2026-10-13 14:00:00'),
+(2, 5, 2, '2026-10-16 10:00:00', '2026-10-16 11:30:00', 12, 'Engineering Society Pick-up Game', 3000.00, 4500.00, 'APPROVED', 1, 'Approved, adjacent to intramural slot.', '2026-10-14 11:00:00', '2026-10-14 08:30:00'),
+(3, 6, 2, '2026-10-16 14:00:00', '2026-10-16 16:00:00', 8, 'Women Basketball Club Training', 3000.00, 6000.00, 'PENDING', NULL, NULL, NULL, '2026-10-15 09:00:00'),
 
 -- Facility 4: Badminton Court A
-(4, 4, 4, '2026-10-16 18:00:00', '2026-10-16 19:30:00', 4, 'Evening Doubles Match', 10.00, 15.00, 'APPROVED', 1, 'Confirmed court A booking.', '2026-10-14 12:00:00', '2026-10-14 09:00:00'),
-(5, 5, 4, '2026-10-17 10:00:00', '2026-10-17 11:00:00', 2, 'Singles Ladder Tournament Match', 10.00, 10.00, 'PENDING', NULL, NULL, NULL, '2026-10-15 08:00:00'),
+(4, 4, 4, '2026-10-16 18:00:00', '2026-10-16 19:30:00', 4, 'Evening Doubles Match', 1500.00, 2250.00, 'APPROVED', 1, 'Confirmed court A booking.', '2026-10-14 12:00:00', '2026-10-14 09:00:00'),
+(5, 5, 4, '2026-10-17 10:00:00', '2026-10-17 11:00:00', 2, 'Singles Ladder Tournament Match', 1500.00, 1500.00, 'PENDING', NULL, NULL, NULL, '2026-10-15 08:00:00'),
 
 -- Facility 1: Olympic Pool
-(6, 6, 1, '2026-10-17 07:00:00', '2026-10-17 08:30:00', 15, 'Swim Club Masters Conditioning', 25.00, 37.50, 'APPROVED', 1, 'Lifeguards on duty confirmed.', '2026-10-14 15:00:00', '2026-10-13 11:00:00'),
-(7, 4, 1, '2026-10-18 16:00:00', '2026-10-18 17:30:00', 6, 'Water Polo Skills Clinic', 25.00, 37.50, 'PENDING', NULL, NULL, NULL, '2026-10-15 09:30:00'),
+(6, 6, 1, '2026-10-17 07:00:00', '2026-10-17 08:30:00', 15, 'Swim Club Masters Conditioning', 2500.00, 3750.00, 'APPROVED', 1, 'Lifeguards on duty confirmed.', '2026-10-14 15:00:00', '2026-10-13 11:00:00'),
+(7, 4, 1, '2026-10-18 16:00:00', '2026-10-18 17:30:00', 6, 'Water Polo Skills Clinic', 2500.00, 3750.00, 'PENDING', NULL, NULL, NULL, '2026-10-15 09:30:00'),
 
 -- Facility 6: Tennis Court 1
-(8, 5, 6, '2026-10-18 09:00:00', '2026-10-18 10:30:00', 2, 'Grad Student Tennis Friendly', 12.00, 18.00, 'APPROVED', 1, 'Authorized court reservation.', '2026-10-14 16:00:00', '2026-10-13 16:45:00'),
+(8, 5, 6, '2026-10-18 09:00:00', '2026-10-18 10:30:00', 2, 'Grad Student Tennis Friendly', 1750.00, 2625.00, 'APPROVED', 1, 'Authorized court reservation.', '2026-10-14 16:00:00', '2026-10-13 16:45:00'),
 
 -- Completed historical bookings for reporting volume
-(9, 4, 2, '2026-09-10 14:00:00', '2026-09-10 16:00:00', 12, 'September Opening Tournament', 20.00, 40.00, 'COMPLETED', 1, 'Completed event', '2026-09-08 10:00:00', '2026-09-07 10:00:00'),
-(10, 5, 1, '2026-09-15 08:00:00', '2026-09-15 10:00:00', 20, 'Fall Swim Time Trials', 25.00, 50.00, 'COMPLETED', 1, 'Completed event', '2026-09-12 11:00:00', '2026-09-11 09:00:00'),
-(11, 6, 4, '2026-09-22 17:00:00', '2026-09-22 19:00:00', 4, 'Badminton Intra-Dept Scrimmage', 10.00, 20.00, 'COMPLETED', 1, 'Completed event', '2026-09-20 10:00:00', '2026-09-19 14:00:00'),
+(9, 4, 2, '2026-09-10 14:00:00', '2026-09-10 16:00:00', 12, 'September Opening Tournament', 3000.00, 6000.00, 'COMPLETED', 1, 'Completed event', '2026-09-08 10:00:00', '2026-09-07 10:00:00'),
+(10, 5, 1, '2026-09-15 08:00:00', '2026-09-15 10:00:00', 20, 'Fall Swim Time Trials', 2500.00, 5000.00, 'COMPLETED', 1, 'Completed event', '2026-09-12 11:00:00', '2026-09-11 09:00:00'),
+(11, 6, 4, '2026-09-22 17:00:00', '2026-09-22 19:00:00', 4, 'Badminton Intra-Dept Scrimmage', 1500.00, 3000.00, 'COMPLETED', 1, 'Completed event', '2026-09-20 10:00:00', '2026-09-19 14:00:00'),
 
 -- Rejected and cancelled bookings (Do NOT block time slots)
-(12, 6, 6, '2026-10-16 11:00:00', '2026-10-16 13:00:00', 4, 'Requested Tennis Clinic', 12.00, 24.00, 'REJECTED', 1, 'Facility allocated to collegiate athletics team.', '2026-10-14 17:00:00', '2026-10-14 14:00:00'),
-(13, 5, 4, '2026-10-16 14:00:00', '2026-10-16 15:00:00', 2, 'Personal Practice', 10.00, 10.00, 'CANCELLED', NULL, 'Cancelled by user due to schedule conflict.', '2026-10-15 07:00:00', '2026-10-14 18:00:00');
+(12, 6, 6, '2026-10-16 11:00:00', '2026-10-16 13:00:00', 4, 'Requested Tennis Clinic', 1750.00, 3500.00, 'REJECTED', 1, 'Facility allocated to collegiate athletics team.', '2026-10-14 17:00:00', '2026-10-14 14:00:00'),
+(13, 5, 4, '2026-10-16 14:00:00', '2026-10-16 15:00:00', 2, 'Personal Practice', 1500.00, 1500.00, 'CANCELLED', NULL, 'Cancelled by user due to schedule conflict.', '2026-10-15 07:00:00', '2026-10-14 18:00:00');
 
 -- ----------------------------------------------------------------------------
 -- 7. SEED MAINTENANCE REPORTS & WORK ORDERS

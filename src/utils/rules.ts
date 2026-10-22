@@ -108,6 +108,8 @@ export function canUserCancelBooking(
   return userId === bookingMemberId;
 }
 
+export const CAMPUS_TIMEZONE = 'Asia/Kolkata';
+
 /**
  * Format currency in Indian Rupees (INR - ₹)
  */
@@ -120,17 +122,20 @@ export function formatCurrency(amount: number): string {
 }
 
 /**
- * Format Date object to local YYYY-MM-DD
+ * Format Date object to local YYYY-MM-DD in IST (Asia/Kolkata)
  */
 export function toLocalDateString(d: Date = new Date()): string {
-  const year = d.getFullYear();
-  const month = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
+  const formatter = new Intl.DateTimeFormat('en-CA', {
+    timeZone: CAMPUS_TIMEZONE,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+  return formatter.format(d);
 }
 
 /**
- * Safely format date into YYYY-MM-DD
+ * Safely format date into YYYY-MM-DD in IST
  */
 export function formatDate(dateStr: string | Date): string {
   if (!dateStr) return '';
@@ -141,7 +146,7 @@ export function formatDate(dateStr: string | Date): string {
 }
 
 /**
- * Safely format time into HH:mm
+ * Safely format time into HH:mm in IST (Asia/Kolkata)
  */
 export function formatTime(dateStr: string | Date): string {
   if (!dateStr) return '';
@@ -152,11 +157,16 @@ export function formatTime(dateStr: string | Date): string {
     }
     return dateStr.substring(0, 5);
   }
-  return dateStr.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+  return dateStr.toLocaleTimeString('en-IN', {
+    timeZone: CAMPUS_TIMEZONE,
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
 }
 
 /**
- * Format a start and end interval for user display: e.g. "2026-10-16 • 10:00 → 11:30"
+ * Format a start and end interval for user display: e.g. "2026-10-16 • 10:00 → 11:30" (IST)
  */
 export function formatDateTimeRange(startStr: string | Date, endStr: string | Date): string {
   const date = formatDate(startStr);

@@ -402,7 +402,7 @@ export default function App() {
             &copy; 2026 Sports Facilities Management System (SFMS) • Campus Athletics & Physical Plant
           </p>
           <div className="flex items-center gap-4">
-            <span className="text-slate-400">Campus Timezone: America/Los_Angeles</span>
+            <span className="text-slate-400">Campus Timezone: Asia/Kolkata (IST, UTC+5:30)</span>
             <span className="text-emerald-400 font-semibold flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse" />
               All Systems Operational

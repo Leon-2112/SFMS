@@ -59,7 +59,7 @@ export const AdminPortal: React.FC = () => {
     sport_type_id: 1,
     location: '',
     capacity: 10,
-    hourly_rate: 400.0,
+    hourly_rate: 2000.0,
     is_indoor: true,
     description: '',
     image_url: '',

@@ -12,7 +12,7 @@ const dbConfig = {
   queueLimit: 0,
   enableKeepAlive: true,
   keepAliveInitialDelay: 0,
-  timezone: 'Z',
+  timezone: '+05:30',
   dateStrings: true,
   connectTimeout: 1000,
 };
